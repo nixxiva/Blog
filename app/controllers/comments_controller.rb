@@ -13,7 +13,7 @@ class CommentsController < ApplicationController
   def create
     @comment = @article.comments.create(comment_params)
     if @comment.save
-      redirect_to article_path(@article) 
+      redirect_to article_comments_path(@article) 
       flash[:notice] = "Comment successfully created!"
     else
       flash[:alert] = "Please try again"
