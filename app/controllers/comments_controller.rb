@@ -8,11 +8,16 @@ class CommentsController < ApplicationController
 
   def new
     @comment = @article.comments.build
+  end
+  
+  def create
+    @comment = @article.comments.create(comment_params)
     if @comment.save
-      redirect_to article_comments_path(@article)
+      redirect_to article_path(@article) 
+      flash[:notice] = "Comment successfully created!"
     else
       flash[:alert] = "Please try again"
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -22,16 +27,12 @@ class CommentsController < ApplicationController
 
   def update
     if @comment.update(comment_params)
-      redirect_to article_comment_path(@article, @comment), notice: "Comment successfully updated!"
+      redirect_to article_comment_path(@article, @comment)
+      flash[:notice] = "Comment successfully updated!"
     else
-      flash[:alert] = "Please try again"
-      render :edit
+      flash[:alert] = "Failed updating comment, try again"
+      render :edit, status: :unprocessable_entity
     end
-  end
-  
-  def create
-    @comment = @article.comments.create(comment_params)
-    redirect_to article_path(@article)
   end
 
   def destroy

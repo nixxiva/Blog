@@ -2,11 +2,25 @@
   <p>
     <%= form.label :commenter %><br>
     <%= form.text_field :commenter %>
+
+    <% if @comment.errors[:commenter].any? %>
+      <%= @comment.errors[:commenter].each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+    <% end %>
   </p>
+
   <p>
     <%= form.label :body %><br>
     <%= form.text_area :body %>
+    
+    <% if @comment.errors[:body].any? %>
+      <%= @comment.errors[:body].each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+    <% end %>
   </p>
+
   <p>
     <%= form.submit %>
   </p>
