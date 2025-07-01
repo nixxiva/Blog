@@ -1,2 +1,6 @@
 <p>Name: <%= @comment.commenter %></p>
 <p>Comment:<%= @comment.body %></p>
+
+<p>
+  <%= link_to "Back to comments", article_comments_path(@article) %>
+</p>

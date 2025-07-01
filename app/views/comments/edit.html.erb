@@ -1,3 +1,7 @@
 <h2>Edit comment</h2>
 
 <%= render "form", comment: @comment, article: @article %>
+
+<p>
+  <%= link_to "Back to comments", article_comments_path(@article) %>
+</p>
